@@ -1,6 +1,7 @@
 from pegawai.models import Pegawai
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from pegawai.models import OperatorConsole
 
 
 def registrasi_pegawai(nip, password):
@@ -26,3 +27,10 @@ def login_pegawai(request, nip, password):
 def logout_pegawai(request):
     logout(request)
     return request
+
+def is_oc(nip):
+    pegawai = Pegawai.objects.get(nip=nip)
+    oc = OperatorConsole.objects.filter(nip=pegawai)
+    if len(oc) != 0:
+        return True
+    return False

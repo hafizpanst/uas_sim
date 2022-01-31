@@ -1,0 +1,28 @@
+{%extends "template/default.html"%}
+{%block main%}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">{{title}}</h1>
+    <div class="card mb-4">
+        <form method="POST">
+            {%csrf_token%}
+            <input name="form" value="Update Kasus" hidden>
+            <label class="form-label">Tanggal Kasus : </label>
+            <label>{{kasus.tanggal}}</label></br>
+            <label class="form-label">Pelapor : </label>
+            <label>{{kasus.pelapor.nip}}</label></br>
+            <label class="form-label">Device : </label>
+            <label>{{kasus.device.idDevice}} - {{kasus.device.jenis}} - {{kasus.device.noBMN}}</label></br>
+            <label class="form-label">Deskripsi : </label>
+            <label>{{kasus.deskripsi}}</label></br>
+            <label class="form-label">Progres : </label>
+            <input name="progres" type="text"><br>
+            <label class="form-label">Status : </label>
+            <select name="status">
+                <option value="Open" default>Open</option>
+                <option value="Close">Close</option>
+            </select>
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+</div>
+{%endblock%}

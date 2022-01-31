@@ -21,3 +21,4 @@ class Kasus(models.Model):
     progres = models.TextField(null=True)
     status = models.CharField(max_length=50, null=True)
     deskripsi = models.TextField(null=True)
+    tanggal_update = models.DateField(null=True)

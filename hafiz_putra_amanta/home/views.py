@@ -8,7 +8,7 @@ def home_view(request):
     try:
         template = "home/template/home.html"
         context = {}
-        context["kasus"] = getKasus()
+        context["daftar_kasus"] = getKasus()
         context["title"] = "KMS-OC"
         if not request.user.is_authenticated:
             return redirect("/pegawai/login")

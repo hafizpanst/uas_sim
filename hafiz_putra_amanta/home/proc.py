@@ -6,5 +6,5 @@ from kasus.models import Kasus
 
 
 def getKasus():
-    kasus = Kasus.objects.all()
+    kasus = Kasus.objects.all().order_by("-idKasus")
     return kasus

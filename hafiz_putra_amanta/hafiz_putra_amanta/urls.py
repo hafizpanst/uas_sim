@@ -24,7 +24,7 @@ from hafiz_putra_amanta.views import index_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("home/", include("home.urls")),
-    # path("mr/", include("mr.urls")),
+    path("kasus/", include("kasus.urls")),
     path("pegawai/", include("pegawai.urls")),
     path("", index_view),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

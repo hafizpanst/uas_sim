@@ -1,0 +1,17 @@
+{%extends "template/default.html"%}
+{%block main%}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">{{title}}</h1>
+    <div class="card mb-4">
+        <form method="POST">
+            {%csrf_token%}
+            <input name="form" value="Tambah Kasus" hidden>
+            <label class="form-label">Device</label>
+            <input name="idDevice" type="text" placeholder="idDevice"></br>
+            <label class="form-label">Deskripsi</label>
+            <input name="deskripsi" type="text"></br>
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+</div>
+{%endblock%}
