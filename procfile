@@ -1,1 +1,0 @@
-web: gunicorn hafiz_putra_amanta.wsgi
