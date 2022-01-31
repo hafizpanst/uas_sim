@@ -1,0 +1,18 @@
+{%extends "template/default.html"%}
+{%block main%}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">{{title}}</h1>
+    <div class="card mb-4">
+        <form method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            {% comment %} <label>Awal Periode</label>
+            <input name="periode_awal" type="date" timezone="id"><br>
+            <label>Akhir Periode</label>
+            <input name="periode_akhir" type="date"><br> {% endcomment %}
+            <label>Csv Rencana Aksi</label>
+            <input name="csv_rencana_aksi" type="file"><br>
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{%endblock%}

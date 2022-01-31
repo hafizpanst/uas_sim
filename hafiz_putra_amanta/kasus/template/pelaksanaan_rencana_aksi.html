@@ -1,0 +1,53 @@
+{%extends "template/default.html"%}
+{%block main%}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">{{title}}</h1>
+    <div class="card mb-4">
+        <form method="POST">
+            {%csrf_token%}
+            <input name="form" value="adding_realisasi" hidden>
+            <label class="form-label">Waktu Pelaksanaan</label>
+            <input name="waktu_pelaksanaan" type="date"><br>
+            <label class="form-label">Keterangan</label>
+            <input name="keterangan" type="text"><br>
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+    <div class="card mb4 table-responsive">
+        <form method="POST">
+            {% csrf_token %}
+            <input name="form" value="delete_realisasi" hidden>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="align-middle">
+                    <tr class="table-dark">
+                        <th>No</th>
+                        <th>Waktu Pelaksanaan</th>
+                        <th>Keterangan</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    {%for x in PRA%}
+                    <tr class="table-active">
+                        <td class="nomor"></td>
+                        <td>{{x.pra.waktu_pelaksanaan}}</td>
+                        <td>{{x.pra.keterangan}}</td>
+                        <td><input type="checkbox" name={{x.pra.id}} value={{x.pra.id}}></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button class="btn btn-dark" type="submit">Delete</button>
+        </form>
+    </div>
+</div>
+{%endblock%}
+
+{%block script%}
+<script>
+    let nomor = document.getElementsByClassName("nomor")
+    for (let i = 0; i < nomor.length; i ++){
+        nomor[i].innerHTML = i + 1
+    }
+</script>
+{% endblock %}

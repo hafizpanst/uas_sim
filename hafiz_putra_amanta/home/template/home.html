@@ -1,0 +1,56 @@
+{%extends "template/default.html"%}
+{%block main%}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">{{title}}</h1>
+    {% comment %} <h5>data per {{tanggal}}</h5>
+    <div class="card mb-4">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="tanggal">Tanggal</label>
+            <input id="tanggal" name="tanggal" type="date">
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </form>
+    </div> {% endcomment %}
+    <div class="card mb-4 table-responsive">
+        <h4>Daftar Kasus</h4>
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="align-middle">
+                <tr class="table-dark">
+                    <th>Bidang/Bagian</th>
+                    <th>Rencana Aksi</th>
+                    <th>Pelaksanaan Rencana Aksi</th>
+                    <th>% Pelaksanaan Rencana Aksi</th>
+            <tbody>
+                {%for x in realisasi_PRA%}
+                <tr class="table-active">
+                    <td>{{x.pengampu.unit_es3}}</td>
+                    <td>{{x.target_PRA}}</td>
+                    <td>{{x.pelaksanaan_PRA}}</td>
+                    <td class="percent">{{x.realisasi_PRA}}</td>
+                </tr>
+                {%endfor%}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>TOTAL</td>
+                    <td class="percent">{{realisasi_PRA_ALL}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}
+
+{%block script%}
+<script>
+    let nomor = document.getElementsByClassName("nomor")
+    for (let i = 0; i < nomor.length; i ++){
+        nomor[i].innerHTML = i + 1
+    }
+
+    let percent = document.getElementsByClassName("percent")
+    for (let i = 0; i < percent.length; i ++){
+        percent[i].innerHTML = (parseFloat(percent[i].innerHTML)*100).toFixed(2)
+    }
+</script>
+{% endblock %}

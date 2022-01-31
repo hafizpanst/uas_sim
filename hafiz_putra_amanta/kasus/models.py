@@ -1,5 +1,5 @@
 from django.db import models
-from pegawai.models import Pegawai
+from pegawai.models import Pegawai, OperatorConsole
 
 # Create your models here.
 def user_directory_path(instance, filename):
@@ -17,10 +17,7 @@ class Kasus(models.Model):
     pelapor = models.ForeignKey(to=Pegawai, on_delete=models.SET_NULL, null=True)
     device = models.ForeignKey(to=Device, on_delete=models.SET_NULL, null=True)
     buktiFoto = models.FileField(upload_to=user_directory_path, null = True)
-
-class TindakLanjut(models.Model):
-    idTindakLanjut = models.AutoField(primary_key=True)
-    idKasus = models.ForeignKey(to=Kasus, on_delete=models.SET_NULL, null=True)
-    idPenindakLanjut = models.ForeignKey(to=Pegawai, on_delete=models.SET_NULL, null=True)
-    progres = models.TextField()
-    status = models.CharField(max_length=50)
+    penindaklanjut = models.ForeignKey(to=OperatorConsole, on_delete=models.SET_NULL, null=True)
+    progres = models.TextField(null=True)
+    status = models.CharField(max_length=50, null=True)
+    deskripsi = models.TextField(null=True)
