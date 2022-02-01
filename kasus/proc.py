@@ -26,3 +26,20 @@ def update_kasus(progres):
     kasus.penindaklanjut = penindaklanjut
     kasus.tanggal_update = date.today()
     kasus.save()
+
+def cari_kasus(data_kasus):
+    try:
+        if data_kasus["key"] == "pelapor":
+            kasus = Kasus.objects.filter(pelapor=Pegawai.objects.get(nip=data_kasus["pelapor"]))
+            return kasus
+        elif data_kasus["key"] == "deskripsi":
+            result = []
+            kasus = Kasus.objects.all()
+            for k in kasus:
+                if data_kasus["deskripsi"].lower() in k.deskripsi.lower():
+                    result += [k]
+                else:
+                    continue
+            return result
+    except Exception as e:
+        print(e)

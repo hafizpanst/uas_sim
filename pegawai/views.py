@@ -23,19 +23,19 @@ def logout_view(request):
     return redirect("/pegawai/login")
 
 def register_view(request):
-    # try:
-    template = "pegawai/template/register.html"
-    context = {}
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        registrasi = registrasi_pegawai(nip=username, password=password)
-        if registrasi:
-            return redirect("/pegawai/login")
-        else:
-            print(registrasi)
-            return redirect("/home/404")
-    return render(request, template, context)
-    # except Exception as e:
-    #     print("error: ", e)
-    #     return redirect("/home/404")
+    try:
+        template = "pegawai/template/register.html"
+        context = {}
+        if request.method == "POST":
+            username = request.POST["username"]
+            password = request.POST["password"]
+            registrasi = registrasi_pegawai(nip=username, password=password)
+            if registrasi:
+                return redirect("/pegawai/login")
+            else:
+                print(registrasi)
+                return redirect("/home/404")
+        return render(request, template, context)
+    except Exception as e:
+        print("error: ", e)
+        return redirect("/home/404")

@@ -12,4 +12,5 @@ urlpatterns = [
     # path("import_pelaksanaan_rencana_aksi", import_pelaksanaan_rencana_aksi_view),
     path("tambah_kasus", tambah_kasus_view),
     path("update_kasus/<int:idKasus>", update_kasus_view),
+    path("cari_kasus", cari_kasus_view),
 ]
