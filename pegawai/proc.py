@@ -1,3 +1,4 @@
+from webbrowser import Opera
 from pegawai.models import Pegawai
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -34,3 +35,28 @@ def is_oc(nip):
     if len(oc) != 0:
         return True
     return False
+
+def tambah_pegawai(data_pegawai):
+    if len(Pegawai.objects.filter(nip=data_pegawai["nip"])) != 0:
+        return False
+    p = Pegawai(
+        nip=data_pegawai["nip"],
+        name=data_pegawai["name"],
+        bidang=data_pegawai["bidang"],
+        seksi=data_pegawai["seksi"],
+        jabatan=data_pegawai["jabatan"],
+    )
+    p.save()
+    return True
+
+def tambah_oc(data_oc):
+    if len(Pegawai.objects.filter(nip=data_oc["nip"])) == 0 or is_oc(data_oc["nip"]):
+        return False
+    
+    oc = OperatorConsole(
+        nip=Pegawai.objects.get(nip=data_oc["nip"]),
+        tahun=data_oc["tahun"],
+        kep=data_oc["kep"],
+    )
+    oc.save()
+    return True

@@ -39,3 +39,47 @@ def register_view(request):
     except Exception as e:
         print("error: ", e)
         return redirect("/home/404")
+
+def tambah_pegawai_view(request):
+    if not is_oc(request.user):
+        return redirect("/home")
+    try:
+        template="pegawai/template/tambah_pegawai.html"
+        context={}
+        context["title"] = "Tambah Pegawai"
+        if request.method == "POST":
+            data_pegawai={}
+            data_pegawai["nip"]=request.POST["nip"]
+            data_pegawai["name"]=request.POST["name"]
+            data_pegawai["bidang"]=request.POST["bidang"]
+            data_pegawai["seksi"]=request.POST["seksi"]
+            data_pegawai["jabatan"]=request.POST["jabatan"]
+            valid=tambah_pegawai(data_pegawai)
+            if valid:
+                return redirect("/pegawai/tambah_pegawai")
+            else:
+                return redirect("/home/404")
+        return render(request, template, context)
+    except:
+        return redirect("/home/404")
+
+def tambah_oc_view(request):
+    if not is_oc(request.user):
+        return redirect("/home")
+    try:
+        template="pegawai/template/tambah_oc.html"
+        context={}
+        context["title"] = "Tambah Operator Console"
+        if request.method == "POST":
+            data_oc={}
+            data_oc["nip"]=request.POST["nip"]
+            data_oc["tahun"]=int(request.POST["tahun"])
+            data_oc["kep"]=request.POST["kep"]
+            valid=tambah_oc(data_oc)
+            if valid:
+                return redirect("/pegawai/tambah_oc")
+            else:
+                return redirect("/home/404")
+        return render(request, template, context)
+    except:
+        return redirect("/home/404")

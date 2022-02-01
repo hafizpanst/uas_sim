@@ -1,0 +1,23 @@
+{%extends "template/default.html"%}
+{%block main%}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">{{title}}</h1>
+    <div class="card mb-4">
+        <form method="POST">
+            {%csrf_token%}
+            <input name="form" value="Tambah Pegawai" hidden>
+            <label class="form-label">NIP</label>
+            <input name="nip" type="text"></br>
+            <label class="form-label">Nama</label>
+            <input name="name" type="text"></br>
+            <label class="form-label">Bidang</label>
+            <input name="bidang" type="text"></br>
+            <label class="form-label">Seksi</label>
+            <input name="seksi" type="text"></br>
+            <label class="form-label">Jabatan</label>
+            <input name="jabatan" type="text"></br>
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+</div>
+{%endblock%}
