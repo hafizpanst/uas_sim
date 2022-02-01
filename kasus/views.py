@@ -10,7 +10,7 @@ def tambah_kasus_view(request):
         if request.method == "POST":
             data_kasus = {}
             data_kasus["pelapor"] = request.user
-            data_kasus["device"] = request.POST["idDevice"]
+            data_kasus["noBMN"] = request.POST["noBMN"]
             data_kasus["deskripsi"] = request.POST["deskripsi"]
             tambah_kasus(data_kasus)
             return redirect("/home")
@@ -59,3 +59,26 @@ def cari_kasus_view(request):
         return render(request, template, context)
     except:
         redirect("/home/404")
+
+def tambah_device_view(request):
+    if not is_oc(request.user):
+        return redirect("/home")
+    try:
+        template="kasus/template/tambah_device.html"
+        context={}
+        context["title"]="Tambah Device"
+        if request.method == "POST":
+            data_device={}
+            data_device["noBMN"]=request.POST["noBMN"]
+            data_device["jenis"]=request.POST["jenis"]
+            data_device["keterangan"]=request.POST["keterangan"]
+            valid = tambah_device(data_device)
+            if valid:
+                return redirect("/home")
+            else:
+                print("valid:", valid)
+                return redirect("/home/404")
+        return render(request, template, context)
+    except Exception as e:
+        print(e)
+        return redirect("/home/404")

@@ -5,11 +5,13 @@
     <div class="card mb-4">
         <form method="POST">
             {%csrf_token%}
-            <input name="form" value="Tambah Kasus" hidden>
-            <label class="form-label">No BMN Device</label>
+            <input name="form" value="Tambah Device" hidden>
+            <label class="form-label">No BMN</label>
             <input name="noBMN" type="text"></br>
-            <label class="form-label">Deskripsi</label>
-            <input name="deskripsi" type="text"></br>
+            <label class="form-label">Jenis</label>
+            <input name="jenis" type="text"></br>
+            <label class="form-label">Keterangan</label>
+            <input name="keterangan" type="text"></br>
             <button type="submit" class="btn btn-dark">Submit</button>
         </form>
     </div>
